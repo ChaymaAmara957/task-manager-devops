@@ -45,6 +45,22 @@ else
     FAILED=1
 fi
 
+# 4) Vérifier une fonctionnalité : ajouter une tâche puis la retrouver dans la page
+code=$(curl -s -o /dev/null -w "%{http_code}" -d "title=tache-smoke-test" "$URL/add")
+if [ "$code" = "302" ]; then
+    echo "[OK] POST /add -> HTTP $code (redirection vers la liste)"
+else
+    echo "[FAIL] POST /add -> HTTP $code (attendu 302)"
+    FAILED=1
+fi
+code=$(curl -s -o /tmp/page.html -w "%{http_code}" "$URL/")
+if [ "$code" = "200" ] && grep -q "tache-smoke-test" /tmp/page.html; then
+    echo "[OK] La tâche ajoutée apparaît dans la liste (HTTP $code)"
+else
+    echo "[FAIL] La liste avec une tâche ne s'affiche pas correctement (HTTP $code)"
+    FAILED=1
+fi
+
 # Résultat final
 if [ "$FAILED" -eq 0 ]; then
     echo "SMOKE TEST: PASSED"
