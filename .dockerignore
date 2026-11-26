@@ -1,0 +1,6 @@
+.git
+tests
+reports
+Jenkinsfile
+README.md
+**/__pycache__
