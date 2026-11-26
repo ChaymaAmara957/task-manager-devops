@@ -17,6 +17,10 @@
         </form>
 
         {% if tasks %}
+        <p class="counter">
+            {{ tasks|length }} tâche(s) &middot;
+            {{ tasks|selectattr('done')|list|length }} terminée(s)
+        </p>
         <ul class="task-list">
             {% for task in tasks %}
             <li class="task {% if task.done %}done{% endif %}">

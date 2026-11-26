@@ -52,4 +52,6 @@ button:hover { opacity: 0.85; }
 .btn-done { background: #2e9d5b; }
 .btn-delete { background: #d64545; }
 
+.counter { margin: 0 0 10px; color: #555; font-size: 14px; }
+
 .empty { text-align: center; color: #888; font-style: italic; }
